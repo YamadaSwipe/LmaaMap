@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Droplets, Globe, Users, Target } from 'lucide-react'
+import { ArrowLeft, Globe, Users, Target } from 'lucide-react'
 
 export default function AboutPage() {
   return (
