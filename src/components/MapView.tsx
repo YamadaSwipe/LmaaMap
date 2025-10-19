@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import axios from 'axios'
+import Link from 'next/link'
 
 interface Partner {
   id: string | number
@@ -53,13 +54,13 @@ export default function MapView() {
               <p>{p.address}</p>
               <p>Type: {p.type}</p>
               <p>Horaires: {p.hours || 'N/A'}</p>
-              <a 
+              <Link 
                 href={`/api/scan?partnerId=${p.id}`} 
                 target="_blank" 
                 rel="noreferrer"
               >
                 Enregistrer remplissage
-              </a>
+              </Link>
             </div>
           </Popup>
         </Marker>

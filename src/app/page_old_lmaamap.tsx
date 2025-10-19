@@ -213,222 +213,25 @@ export default function Home() {
               <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">3</div>
               <h3 className="text-lg md:text-xl font-bold mb-4">Localiser une fontaine</h3>
               <p className="text-gray-600 text-sm md:text-base">
-                Trouvez la fontaine la plus proche ou achetez une gourde chez nos partenaires engagés.
+                Trouvez la fontaine la plus proche ou achetez une bouteille réutilisable chez nos partenaires.
               </p>
             </div>
             
             <div className="text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Droplets className="w-8 h-8 md:w-10 md:h-10 text-cyan-600" />
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Droplets className="w-8 h-8 md:w-10 md:h-10 text-red-600" />
               </div>
-              <div className="w-8 h-8 bg-cyan-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">4</div>
-              <h3 className="text-lg md:text-xl font-bold mb-4">Remplir et payer</h3>
+              <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">4</div>
+              <h3 className="text-lg md:text-xl font-bold mb-4">Agir pour la planète</h3>
               <p className="text-gray-600 text-sm md:text-base">
-                Utilisez votre QR code, monnaie ou CB. Chaque utilisation évite une bouteille plastique !
+                Réduisez votre empreinte plastique et contribuez à un Maroc plus vert et durable.
               </p>
-            </div>
-          </div>
-          
-          {/* Encadré vision Smart */}
-          <div className="mt-16 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 text-center border border-blue-100">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <Globe className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-gray-900">Vision Smart pour un Tourisme Durable</div>
-                <div className="text-gray-600">Valorisation des villes • Partenaires engagés • Accès à l'eau facilité</div>
-              </div>
-            </div>
-            <p className="text-gray-700 max-w-4xl mx-auto">
-              <strong>LmaaMap</strong> transforme l'expérience touristique au Maroc en créant un réseau intelligent de fontaines connectées. 
-              Nous valorisons les villes partenaires, facilitons l'accès à l'eau potable et offrons une empreinte écologique positive 
-              pour un tourisme responsable et durable.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Section Impact et Technologie */}
-      <div className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Impact Environnemental Mesuré & Traçabilité Intelligente</h2>
-            <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
-              Nos fontaines connectées <strong>quantifient en temps réel</strong> la réduction du plastique. 
-              Technologie intelligente pour un impact environnemental transparent et vérifiable.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Shield className="w-8 h-8 md:w-10 md:h-10 text-blue-600" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold mb-4">Filtration Avancée</h3>
-              <p className="text-gray-600 text-sm md:text-base">
-                <strong>Technologie de dernière génération</strong> avec multi-filtration garantissant une eau pure et sécurisée selon les normes internationales.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Building className="w-8 h-8 md:w-10 md:h-10 text-green-600" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold mb-4">Villes & Partenaires Engagés</h3>
-              <p className="text-gray-600 text-sm md:text-base">
-                Réseau de <strong>partenaires marocains engagés</strong> pour valoriser les villes et créer un tourisme durable et responsable.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Smartphone className="w-8 h-8 md:w-10 md:h-10 text-purple-600" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold mb-4">Fontaines Connectées</h3>
-              <p className="text-gray-600 text-sm md:text-base">
-                <strong>Traçabilité complète</strong> pour le suivi des performances de filtration en temps réel. Monitoring intelligent pour une qualité optimale.
-              </p>
-            </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Droplets className="w-8 h-8 md:w-10 md:h-10 text-cyan-600" />
-              </div>
-              <h3 className="text-lg md:text-xl font-bold mb-4">Impact Environnemental</h3>
-              <p className="text-gray-600 text-sm md:text-base">
-                <strong>Mesure en temps réel de l'impact</strong> : chaque utilisation évite une bouteille plastique. Quantification précise de la réduction des déchets.
-              </p>
-            </div>
-          </div>
-          
-          {/* Encadré sécurité et qualité */}
-          <div className="mt-12 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 text-center border border-blue-100">
-            <div className="flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
-              <div className="text-left">
-                <div className="text-2xl font-bold text-gray-900">Sécurité Sanitaire Garantie</div>
-                <div className="text-gray-600">Contrôles qualité permanents • Normes européennes</div>
-              </div>
-            </div>
-            <p className="text-gray-700 max-w-3xl mx-auto">
-              Nos fontaines sont équipées de <strong>systèmes de filtration multicouches</strong> et font l'objet de contrôles qualité réguliers. 
-              Une solution de confiance adoptée par des milliers de voyageurs à travers l'Europe et l'Afrique du Nord.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Section témoignages et statistiques */}
-      <div className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
-          {/* Statistiques d'impact */}
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">LmaaMap : Impact au Maroc</h2>
-            <p className="text-xl text-gray-600 mb-12">
-              Un réseau intelligent pour un tourisme durable au Royaume
-            </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="text-4xl font-bold text-blue-600 mb-2">47</div>
-                <div className="text-gray-600">Fontaines connectées</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-green-600 mb-2">15+</div>
-                <div className="text-gray-600">Villes partenaires</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-cyan-600 mb-2">25+</div>
-                <div className="text-gray-600">Partenaires engagés</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold text-purple-600 mb-2">100%</div>
-                <div className="text-gray-600">Tourisme durable</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Témoignages */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-gray-700 mb-4">
-                "En tant que touriste française, j'apprécie LmaaMap qui facilite l'accès à l'eau potable au Maroc. Une approche intelligente et durable!"
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                  <User className="w-6 h-6 text-blue-600" />
-                </div>
-                <div>
-                  <div className="font-semibold">Marie L.</div>
-                  <div className="text-gray-500 text-sm">Touriste - France</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-gray-700 mb-4">
-                "LmaaMap révolutionne l'expérience touristique au Maroc ! Accès facile à l'eau potable partout, c'est génial."
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
-                  <User className="w-6 h-6 text-green-600" />
-                </div>
-                <div>
-                  <div className="font-semibold">Ahmed K.</div>
-                  <div className="text-gray-500 text-sm">Guide touristique - Marrakech</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white p-6 rounded-xl shadow-lg md:col-span-2 lg:col-span-1">
-              <div className="flex items-center mb-4">
-                <div className="flex text-yellow-400">
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                  <Star className="w-5 h-5 fill-current" />
-                </div>
-              </div>
-              <p className="text-gray-700 mb-4">
-                "Parfait pour les familles en voyage au Maroc! Mes enfants boivent une eau pure et sûre. Un réseau intelligent."
-              </p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
-                  <User className="w-6 h-6 text-purple-600" />
-                </div>
-                <div>
-                  <div className="font-semibold">Sofia R.</div>
-                  <div className="text-gray-500 text-sm">Famille voyageuse</div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Section d'engagement */}
+      {/* Section Rejoignez le mouvement */}
       <div className="py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">Rejoignez le mouvement</h2>
@@ -503,15 +306,15 @@ export default function Home() {
                 Impact environnemental quantifié, traçabilité complète, expérience visiteur optimisée.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Facebook className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                </Link>
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Instagram className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                </Link>
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Twitter className="w-6 h-6" />
-                </a>
+                </Link>
               </div>
             </div>
 
