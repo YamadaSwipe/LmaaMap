@@ -1,0 +1,164 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String?
+  phone       String?
+  city        String?
+  country     String?  // Code pays (ex: 'MA', 'FR', 'US')
+  role        String   @default("CONSUMER") // ADMIN, CONSUMER, PARTNER
+  password    String?
+  engagement  String?
+  credits     Float    @default(0.00) // Solde en crédits (euros ou unités)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  transactions Transaction[]
+  scans        Scan[]
+
+  @@map("users")
+}
+
+model Partner {
+  id            String   @id @default(cuid())
+  name          String
+  email         String   @unique
+  phone         String?
+  address       String?
+  city          String?
+  website       String?
+  description   String?
+  type          String?  // RESTAURANT, HOTEL, OFFICE, etc.
+  employees     Int?
+  commitment    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("partners")
+}
+
+model Fountain {
+  id          String   @id @default(cuid())
+  name        String
+  latitude    Float
+  longitude   Float
+  address     String?
+  city        String?
+  description String?
+  isActive    Boolean  @default(true)
+  qrCode      String?  @unique
+  costPerUse  Float    @default(0.50) // Coût par utilisation en crédits
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  scans       Scan[]
+
+  @@map("fountains")
+}
+
+model Scan {
+  id         String   @id @default(cuid())
+  fountainId String
+  userId     String?
+  amount     Float?   // Montant débité
+  status     String   @default("SUCCESS") // SUCCESS, FAILED, INSUFFICIENT_CREDITS
+  scannedAt  DateTime @default(now())
+  userAgent  String?
+  ipAddress  String?
+
+  // Relations
+  fountain   Fountain? @relation(fields: [fountainId], references: [id])
+  user       User?     @relation(fields: [userId], references: [id])
+
+  @@map("scans")
+}
+
+// Nouveau modèle pour les transactions de crédits
+model Transaction {
+  id          String   @id @default(cuid())
+  userId      String
+  type        String   // PURCHASE, USAGE, REFUND, ADMIN_ADD, ADMIN_REMOVE
+  amount      Float    // Montant positif ou négatif
+  description String?
+  relatedId   String?  // ID du scan ou autre référence
+  createdAt   DateTime @default(now())
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("transactions")
+}
+
+// Modèle pour les demandes de référencement d'établissements éco-responsables
+model ReferencementRequest {
+  id                    String   @id @default(cuid())
+  nom                   String
+  type                  String
+  email                 String
+  telephone             String
+  adresse               String
+  codePostal            String
+  ville                 String
+  pays                  String   @default("France")
+  latitude              Float?
+  longitude             Float?
+  description           String?
+  pratiquesEco          String?
+  labelsCertifications  String?
+  siteWeb               String?
+  reseauxSociaux        String?
+  status                String   @default("EN_ATTENTE") // EN_ATTENTE, VALIDE, REFUSE
+  greenYouPlaceId       String?  // ID du lieu créé sur la carte
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("referencement_requests")
+}
+
+// Modèle pour les établissements GreenYou validés et visibles sur la carte
+model GreenYouPlace {
+  id                    String   @id @default(cuid())
+  nom                   String
+  type                  String
+  email                 String?
+  telephone             String?
+  adresse               String
+  codePostal            String
+  ville                 String
+  pays                  String   @default("France")
+  latitude              Float
+  longitude             Float
+  description           String?
+  pratiquesEco          String?
+  labelsCertifications  String?
+  siteWeb               String?
+  reseauxSociaux        String?
+  isActive              Boolean  @default(true)
+  referencementId       String?  @unique // Lien vers la demande d'origine
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("greenyou_places")
+}
+
+model Counter {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  value        Int      @default(0)
+  lastUpdated  DateTime @default(now())
+
+  @@map("counters")
+}
