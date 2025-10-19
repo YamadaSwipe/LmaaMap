@@ -248,7 +248,7 @@ export default function QRGenerator({
             </label>
             <select
               value={errorLevel}
-              onChange={(e) => setErrorLevel(e.target.value as any)}
+              onChange={(e) => setErrorLevel(e.target.value as 'L' | 'M' | 'Q' | 'H')}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="L">L - Faible (~7%)</option>

@@ -1,4 +1,5 @@
 "use client";
+import Link from 'next/link';
 
 export default function DiagnosticPage() {
   return (
@@ -13,8 +14,8 @@ export default function DiagnosticPage() {
         <li>Statut: Page chargée avec succès</li>
       </ul>
       <hr />
-      <p><a href="/hebergement" style={{color: 'blue', textDecoration: 'underline'}}>← Retour à la page GreenYou principale</a></p>
-      <p><a href="/" style={{color: 'blue', textDecoration: 'underline'}}>← Retour à l'accueil LmaaMap</a></p>
+      <p><Link href="/hebergement" style={{color: 'blue', textDecoration: 'underline'}}>← Retour à la page GreenYou principale</Link></p>
+      <p><Link href="/" style={{color: 'blue', textDecoration: 'underline'}}>← Retour à l'accueil LmaaMap</Link></p>
     </div>
   );
 }

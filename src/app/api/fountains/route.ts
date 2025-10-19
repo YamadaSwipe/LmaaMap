@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma';
 import { getFountainsAroundPoint, getMoroccanFountains, getFrenchFountains, getInternationalFountains, MOROCCO_CITIES } from '@/lib/overpass'
-
-const prisma = new PrismaClient()
 
 export async function GET(request: NextRequest) {
   try {
@@ -15,17 +13,22 @@ export async function GET(request: NextRequest) {
     const databaseFountains = await prisma.fountain.findMany()
 
     // Convertir les fontaines de la base de données au format de l'API
-    const dbFountainsFormatted = databaseFountains.map(fountain => ({
+    const dbFountainsFormatted = databaseFountains.map((fountain: {
+      id: string;
+      name: string;
+      latitude: number;
+      longitude: number;
+      address?: string;
+      city?: string;
+      description?: string;
+      createdAt: string;
+    }) => ({
       id: fountain.id,
       name: fountain.name,
-      type: 'fountain',
       latitude: fountain.latitude,
       longitude: fountain.longitude,
       address: fountain.address || `${fountain.city || 'Ville non spécifiée'}`,
-      hours: '24h/24', // Par défaut pour les fontaines admin
-      status: 'active',
       description: fountain.description || 'Fontaine créée via administration',
-      quality: 'bonne',
       maintenance: `Créée le: ${new Date(fountain.createdAt).toLocaleDateString('fr-FR')}`
     }))
 

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 export default function ReferencementAdminPage() {
-  const [demandes, setDemandes] = useState<any[]>([]);
+  const [demandes, setDemandes] = useState<{ id: string; name: string; status: string }[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({

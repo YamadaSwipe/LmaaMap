@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client';
 
 export async function POST(request: NextRequest) {
   try {
@@ -82,7 +81,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Effectuer la transaction dans une transaction de base de données
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: Prisma.TransactionClient) => {
       // Débiter l'utilisateur
       const updatedUser = await tx.user.update({
         where: { id: user.id },

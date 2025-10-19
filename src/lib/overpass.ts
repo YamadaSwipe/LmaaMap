@@ -45,7 +45,7 @@ export async function getFountainsInBounds(bounds: BoundingBox): Promise<OSMFoun
 
     const data = await response.json()
     
-    return data.elements.map((element: any): OSMFountain => ({
+    return data.elements.map((element: { id: string; type: 'node' | 'way' | 'relation'; lat: number; lon: number; tags: Record<string, string> }): OSMFountain => ({
       id: `osm-${element.type}-${element.id}`,
       name: element.tags?.name || element.tags?.description || 'Fontaine publique',
       lat: element.lat,
@@ -161,7 +161,7 @@ export async function getFountainsAroundPoint(lat: number, lon: number, radiusMe
 
     const data = await response.json()
     
-    return data.elements.map((element: any): OSMFountain => ({
+    return data.elements.map((element: { id: string; type: 'node' | 'way' | 'relation'; lat: number; lon: number; tags: Record<string, string> }): OSMFountain => ({
       id: `osm-${element.type}-${element.id}`,
       name: element.tags?.name || element.tags?.description || 'Fontaine publique',
       lat: element.lat,

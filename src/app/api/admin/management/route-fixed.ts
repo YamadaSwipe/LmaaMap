@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
+import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   try {
@@ -58,7 +56,7 @@ export async function GET(request: NextRequest) {
         take: 50 // Limiter à 50 utilisateurs pour la performance
       })
 
-      const formattedUsers = users.map(user => ({
+      const formattedUsers = users.map((user: { id: string; name: string; email: string; role: string; createdAt: Date; updatedAt: Date }) => ({
         id: user.id,
         email: user.email,
         name: user.name || 'Utilisateur sans nom',
@@ -82,7 +80,7 @@ export async function GET(request: NextRequest) {
         orderBy: { createdAt: 'desc' }
       })
 
-      const formattedPartners = partners.map(partner => ({
+      const formattedPartners = partners.map((partner: { id: string; name: string; email: string; phone?: string; address?: string; type?: string; createdAt: Date }) => ({
         id: partner.id,
         name: partner.name,
         email: partner.email,

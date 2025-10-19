@@ -197,22 +197,9 @@ export default function QRScanner({
       const qrId = data.split('/').pop()
       
       // Simulation des infos fontaine
-      const mockFountains: Record<string, any> = {
-        'qr-001': {
-          id: 'fountain-001',
-          name: 'Fontaine Centrale',
-          location: 'Place de la République, Paris'
-        },
-        'qr-002': {
-          id: 'fountain-002',
-          name: 'Fontaine Parc Municipal',
-          location: 'Parc Municipal, Paris'
-        },
-        'qr-003': {
-          id: 'fountain-003',
-          name: 'Restaurant Central - Point d\'eau',
-          location: 'Restaurant Central, 15 Rue de Rivoli'
-        }
+      const mockFountains: Record<string, { id: string; name: string; location: string }> = {
+        'fountain-001': { id: 'fountain-001', name: 'Fontaine Centrale', location: 'Centre-ville' },
+        'fountain-002': { id: 'fountain-002', name: 'Fontaine du Parc', location: 'Parc Municipal' }
       }
 
       return {

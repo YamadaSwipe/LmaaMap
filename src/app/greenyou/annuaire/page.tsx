@@ -228,9 +228,9 @@ export default function AnnuaireGreenYou() {
                     {place.telephone && (
                       <div className="flex items-center gap-2 text-sm">
                         <Phone className="w-4 h-4 text-gray-400" />
-                        <a href={`tel:${place.telephone}`} className="text-green-600 hover:underline">
+                        <Link href={`tel:${place.telephone}`} className="text-green-600 hover:underline">
                           {place.telephone}
-                        </a>
+                        </Link>
                       </div>
                     )}
 
@@ -238,9 +238,9 @@ export default function AnnuaireGreenYou() {
                     {place.email && (
                       <div className="flex items-center gap-2 text-sm">
                         <Mail className="w-4 h-4 text-gray-400" />
-                        <a href={`mailto:${place.email}`} className="text-green-600 hover:underline truncate">
+                        <Link href={`mailto:${place.email}`} className="text-green-600 hover:underline truncate">
                           {place.email}
-                        </a>
+                        </Link>
                       </div>
                     )}
 

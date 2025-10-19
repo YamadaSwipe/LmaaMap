@@ -225,7 +225,7 @@ export default function Home() {
               <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold">3</div>
               <h3 className="text-lg md:text-xl font-bold mb-4">Localiser une fontaine</h3>
               <p className="text-gray-600 text-sm md:text-base">
-                Trouvez la fontaine la plus proche ou achetez une gourde chez nos partenaires engagés.
+                Trouvez la fontaine la plus proche ou achetez unegourde chez nos partenaires engagés.
               </p>
             </div>
             
@@ -515,15 +515,15 @@ export default function Home() {
                 Impact environnemental quantifié, traçabilité complète, expérience visiteur optimisée.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Facebook className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                </Link>
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Instagram className="w-6 h-6" />
-                </a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                </Link>
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   <Twitter className="w-6 h-6" />
-                </a>
+                </Link>
               </div>
             </div>
 

@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs'
 import QRCode from 'qrcode'
-
-const prisma = new PrismaClient()
+import Stripe from 'stripe';
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,9 +36,8 @@ export async function POST(request: NextRequest) {
       }
     } else {
       // Mode production avec Stripe réel
-      const Stripe = require('stripe')
       const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-        apiVersion: '2024-06-20',
+        apiVersion: '2025-09-30.clover',
       })
       
       sessionData = await stripe.checkout.sessions.retrieve(sessionId)

@@ -10,7 +10,7 @@ function PaymentSuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const [loading, setLoading] = useState(true)
-  const [paymentData, setPaymentData] = useState<any>(null)
+  const [paymentData, setPaymentData] = useState<{ id: string; amount: number; status: string } | null>(null)
   const [qrCode, setQrCode] = useState('')
 
   useEffect(() => {

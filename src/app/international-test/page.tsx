@@ -19,7 +19,7 @@ interface ApiResponse {
     international: boolean
   }
   counts: FountainCounts
-  data: any[]
+  data: { id: string; name: string; value: number }[]
 }
 
 function InternationalTestContent() {

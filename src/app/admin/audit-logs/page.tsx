@@ -36,7 +36,7 @@ export default function AuditLogs() {
 
   useEffect(() => {
     loadAuditLogs()
-  }, [entityFilter, actionFilter, dateFilter])
+  }, [entityFilter, actionFilter, dateFilter, loadAuditLogs])
 
   async function loadAuditLogs() {
     try {
@@ -171,7 +171,7 @@ export default function AuditLogs() {
           <div className="bg-white p-4 rounded-lg shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Aujourd'hui</p>
+                <p className="text-sm text-gray-600">Aujourd&apos;hui</p>
                 <p className="text-2xl font-bold text-green-600">
                   {logs.filter(log => {
                     const logDate = new Date(log.timestamp).toDateString()

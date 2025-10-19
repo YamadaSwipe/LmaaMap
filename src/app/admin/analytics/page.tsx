@@ -26,9 +26,7 @@ import {
   Droplets, 
   Building2, 
   Activity,
-  Calendar,
-  Download,
-  Filter
+  Download
 } from 'lucide-react'
 import { format, subDays, startOfDay } from 'date-fns'
 import { fr } from 'date-fns/locale'
@@ -61,8 +59,6 @@ interface AnalyticsData {
     avgScanPerUser: number
   }
 }
-
-const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6']
 
 export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null)

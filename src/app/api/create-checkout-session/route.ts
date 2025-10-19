@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Stripe from 'stripe';
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,9 +33,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Mode production avec Stripe réel
-    const Stripe = require('stripe')
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-      apiVersion: '2024-06-20',
+      apiVersion: '2025-09-30.clover',
     })
 
     const session = await stripe.checkout.sessions.create({

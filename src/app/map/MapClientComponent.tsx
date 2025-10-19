@@ -4,29 +4,16 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, MapPin, Navigation, Search, Filter, Plus, Menu } from 'lucide-react'
 import { staticWaterPoints } from './staticData'
-
-// Types pour éviter les erreurs d'import
-type MapContainerType = any
-type TileLayerType = any  
-type MarkerType = any
-type PopupType = any
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import './map.css';
 
 // Imports conditionnels pour éviter les erreurs SSR
-let MapContainer: MapContainerType, TileLayer: TileLayerType, Marker: MarkerType, Popup: PopupType, L: any
-
 if (typeof window !== 'undefined') {
-  const leaflet = require('react-leaflet')
-  MapContainer = leaflet.MapContainer
-  TileLayer = leaflet.TileLayer
-  Marker = leaflet.Marker
-  Popup = leaflet.Popup
-  
   // Import de Leaflet core
-  L = require('leaflet')
-  
-  // Import CSS seulement côté client
-  require('leaflet/dist/leaflet.css')
-  require('./map.css')
+  // @ts-ignore
+  const { MapContainer: MC, TileLayer: TL, Marker: M, Popup: P } = require('react-leaflet');
 }
 
 // Interface pour les points d'eau et établissements
@@ -126,20 +113,13 @@ export default function MapClientComponent() {
           // Ajouter les établissements GreenYou validés
           if (greenYouData.success && Array.isArray(greenYouData.places)) {
             const greenYouPoints: WaterPoint[] = greenYouData.places
-              .filter((place: any) => place.isActive && place.latitude && place.longitude)
-              .map((place: any) => ({
-                id: place.id,
-                name: place.nom,
-                latitude: parseFloat(place.latitude),
-                longitude: parseFloat(place.longitude),
-                address: `${place.adresse}, ${place.ville}`,
-                type: 'greenyou' as const,
-                status: 'active' as const,
-                description: place.description,
-                email: place.email,
-                phone: place.telephone,
-                category: place.type
-              }))
+              .filter((place: { isActive: boolean; latitude: number; longitude: number }) => place.isActive && place.latitude && place.longitude)
+              .map((place: { latitude: number; longitude: number; name: string }) => ({
+                lat: place.latitude,
+                lng: place.longitude,
+                name: place.name,
+              }));
+
             allWaterPoints = [...allWaterPoints, ...greenYouPoints]
             console.log('✅ Établissements GreenYou chargés:', greenYouPoints.length)
           }
@@ -334,7 +314,7 @@ export default function MapClientComponent() {
             
             <select
               value={filterType}
-              onChange={(e) => setFilterType(e.target.value as any)}
+              onChange={(e) => setFilterType(e.target.value as 'fountain' | 'partner' | 'greenyou' | 'all')}
               className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
               <option value="all">Tous les types</option>
@@ -401,13 +381,13 @@ export default function MapClientComponent() {
                       {point.phone && (
                         <div className="flex justify-between">
                           <span className="text-gray-500">Tél:</span>
-                          <a href={`tel:${point.phone}`} className="font-medium text-blue-600 hover:underline">{point.phone}</a>
+                          <Link href={`tel:${point.phone}`} className="font-medium text-blue-600 hover:underline">{point.phone}</Link>
                         </div>
                       )}
                       {point.email && (
                         <div className="flex justify-between">
                           <span className="text-gray-500">Email:</span>
-                          <a href={`mailto:${point.email}`} className="font-medium text-blue-600 hover:underline text-xs truncate max-w-[150px]">{point.email}</a>
+                          <Link href={`mailto:${point.email}`} className="font-medium text-blue-600 hover:underline text-xs truncate max-w-[150px]">{point.email}</Link>
                         </div>
                       )}
                       {point.hours && (

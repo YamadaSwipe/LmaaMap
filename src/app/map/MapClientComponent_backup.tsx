@@ -4,15 +4,16 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { ArrowLeft, MapPin, Navigation, Search, Filter, Plus, Menu } from 'lucide-react'
+import type { Map as LeafletMap, TileLayer as LeafletTileLayer, Marker as LeafletMarker, Popup as LeafletPopup } from 'leaflet';
 
 // Types pour éviter les erreurs d'import
-type MapContainerType = any
-type TileLayerType = any  
-type MarkerType = any
-type PopupType = any
+type MapContainerType = LeafletMap;
+type TileLayerType = LeafletTileLayer;
+type MarkerType = LeafletMarker;
+type PopupType = LeafletPopup;
 
 // Imports conditionnels pour éviter les erreurs SSR
-let MapContainer: MapContainerType, TileLayer: TileLayerType, Marker: MarkerType, Popup: PopupType, L: any
+let MapContainer: MapContainerType, TileLayer: TileLayerType, Marker: MarkerType, Popup: PopupType, L: typeof import('leaflet');
 
 if (typeof window !== 'undefined') {
   const leaflet = require('react-leaflet')
