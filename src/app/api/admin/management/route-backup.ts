@@ -7,7 +7,7 @@ interface User {
   id: string
   email: string
   name: string
-  type: 'consumer' | 'partner' | 'admin'
+  role: 'consumer' | 'partner' | 'admin'
   status: 'active' | 'suspended' | 'pending'
   createdAt: string
   lastLogin?: string
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
       id: user.id,
       email: user.email,
       name: user.name,
-      type: user.type,
+      role: user.role, // Remplacement de `type` par `role`
       status: user.status,
       createdAt: user.createdAt,
       lastLogin: user.lastLogin,
