@@ -29,16 +29,15 @@ export async function GET(request: NextRequest) {
       email: user.email,
       name: user.name,
       role: user.role, // Remplacement de `type` par `role`
-      status: user.status,
       createdAt: user.createdAt,
       lastLogin: user.lastLogin,
       totalScans: user.totalScans
     }))
 
     const userStats = {
-      active: transformedUsers.filter((u) => u.status === 'active').length,
-      suspended: transformedUsers.filter((u) => u.status === 'suspended').length,
-      pending: transformedUsers.filter((u) => u.status === 'pending').length
+      active: transformedUsers.filter((u) => u.role === 'active').length, // Remplacement basé sur `role`
+      suspended: transformedUsers.filter((u) => u.role === 'suspended').length,
+      pending: transformedUsers.filter((u) => u.role === 'pending').length
     }
 
     const partners = await prisma.partner.findMany()
