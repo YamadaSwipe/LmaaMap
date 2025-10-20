@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
+import { Prisma } from '@prisma/client';
 
 // Types pour les entités
 interface User {
@@ -23,7 +24,7 @@ interface Partner {
 export async function GET(request: NextRequest) {
   try {
     const users = await prisma.user.findMany()
-    const transformedUsers = users.map((user: User) => ({
+    const transformedUsers = users.map((user: Prisma.UserGetPayload<{}>) => ({
       id: user.id,
       email: user.email,
       name: user.name,
@@ -35,9 +36,9 @@ export async function GET(request: NextRequest) {
     }))
 
     const userStats = {
-      active: transformedUsers.filter((u: User) => u.status === 'active').length,
-      suspended: transformedUsers.filter((u: User) => u.status === 'suspended').length,
-      pending: transformedUsers.filter((u: User) => u.status === 'pending').length
+      active: transformedUsers.filter((u) => u.status === 'active').length,
+      suspended: transformedUsers.filter((u) => u.status === 'suspended').length,
+      pending: transformedUsers.filter((u) => u.status === 'pending').length
     }
 
     const partners = await prisma.partner.findMany()
