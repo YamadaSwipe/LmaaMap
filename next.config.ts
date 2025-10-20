@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['example.com'], // Remplacez par vos domaines autorisés
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;

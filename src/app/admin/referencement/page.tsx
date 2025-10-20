@@ -3,7 +3,21 @@
 import { useEffect, useState } from "react";
 
 export default function ReferencementAdminPage() {
-  const [demandes, setDemandes] = useState<{ id: string; name: string; status: string }[]>([]);
+  const [demandes, setDemandes] = useState<{
+    id: string;
+    name: string;
+    status: string;
+    type?: string;
+    localisation?: string;
+    contact?: string;
+    description?: string;
+    actions?: string;
+    ecoLabel?: string;
+    triSelectif?: string;
+    energieRenouvelable?: string;
+    engagementLocal?: string;
+    preuves?: string;
+  }[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({
@@ -156,10 +170,12 @@ export default function ReferencementAdminPage() {
           {demandes.map((d) => (
             <li key={d.id} className="border rounded p-4 bg-white">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-bold text-green-700">{d.nom}</span>
+                <span className="font-bold text-green-700">{d.name}</span>
                 <span className={`px-2 py-1 rounded text-xs font-bold ${d.status === "VALIDE" ? "bg-green-200 text-green-800" : d.status === "REFUSE" ? "bg-red-200 text-red-800" : "bg-yellow-100 text-yellow-800"}`}>{d.status}</span>
               </div>
-              <div className="text-sm mb-2">{d.type} | {d.localisation} | {d.contact}</div>
+              <div className="text-sm mb-2">
+                {d.type || 'Type inconnu'} | {d.localisation || 'Localisation inconnue'} | {d.contact || 'Contact inconnu'}
+              </div>
               <div className="text-xs text-gray-600 mb-2">{d.description}</div>
               <div className="mb-2">
                 <span className="font-semibold">Actions durables :</span> {d.actions}

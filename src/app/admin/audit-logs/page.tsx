@@ -35,8 +35,8 @@ export default function AuditLogs() {
   const [dateFilter, setDateFilter] = useState('7d')
 
   useEffect(() => {
-    loadAuditLogs()
-  }, [entityFilter, actionFilter, dateFilter, loadAuditLogs])
+    loadAuditLogs();
+  }, [entityFilter, actionFilter, dateFilter]);
 
   async function loadAuditLogs() {
     try {

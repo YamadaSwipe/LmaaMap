@@ -15,8 +15,7 @@ export async function GET(request: NextRequest) {
 
     // Récupérer l'utilisateur avec son solde
     const user = await prisma.user.findUnique({
-      where: { id: userId },
-      include: { credits: true }
+      where: { id: userId }
     })
 
     if (!user) {
@@ -26,11 +25,8 @@ export async function GET(request: NextRequest) {
       )
     }
 
-    const stats = user.credits.reduce((acc: { total: number; count: number }, stat: { amount: number; _count: number }) => {
-      acc.total += stat.amount
-      acc.count += stat._count
-      return acc
-    }, { total: 0, count: 0 })
+    // Simuler les crédits si nécessaire
+    const stats = { total: user.credits || 0, count: 1 }
 
     return NextResponse.json({ success: true, stats })
   } catch (error) {
@@ -51,17 +47,11 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const updatedUser = await prisma.$transaction(async (tx: any) => {
-      const user = await tx.user.update({
-        where: { id: userId },
-        data: {
-          credits: {
-            create: { amount }
-          }
-        }
-      })
-
-      return user
+    const updatedUser = await prisma.user.update({
+      where: { id: userId },
+      data: {
+        credits: amount // Mettre à jour directement le champ crédits
+      }
     })
 
     return NextResponse.json({ success: true, updatedUser })

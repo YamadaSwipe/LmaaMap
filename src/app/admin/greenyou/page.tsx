@@ -41,8 +41,8 @@ export default function AdminGreenYou() {
   const [placeCoordinates, setPlaceCoordinates] = useState({ latitude: '', longitude: '' })
 
   useEffect(() => {
-    checkAuth()
-  }, [])
+    checkAuth();
+  }, []);
 
   const checkAuth = async () => {
     try {

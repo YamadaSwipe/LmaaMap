@@ -42,8 +42,8 @@ export default function FountainsManagement() {
   const [qualityFilter, setQualityFilter] = useState('all')
 
   useEffect(() => {
-    loadFountains()
-  }, [])
+    loadFountains();
+  }, []);
 
   async function loadFountains() {
     try {
