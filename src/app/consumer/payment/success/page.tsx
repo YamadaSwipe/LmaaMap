@@ -10,7 +10,7 @@ function PaymentSuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const [loading, setLoading] = useState(true)
-  const [paymentData, setPaymentData] = useState<{ id: string; amount: number; status: string } | null>(null)
+  const [paymentData, setPaymentData] = useState<{ id: string; amount: number; status: string; creditAmount?: number; userEmail?: string } | null>(null)
   const [qrCode, setQrCode] = useState('')
 
   useEffect(() => {
@@ -41,7 +41,8 @@ function PaymentSuccessContent() {
 
   const downloadQRCode = () => {
     const link = document.createElement('a')
-    link.download = `qrcode-lmaamap-${paymentData?.userEmail}.png`
+    const emailPart = paymentData?.userEmail ? `-${paymentData.userEmail}` : ''
+    link.download = `qrcode-lmaamap${emailPart}.png`
     link.href = qrCode
     link.click()
   }
@@ -93,8 +94,8 @@ function PaymentSuccessContent() {
 
         <div className="bg-gray-50 rounded-lg p-4 mb-6">
           <div className="text-sm text-gray-600 mb-2">Récapitulatif</div>
-          <div className="font-semibold text-gray-900">{paymentData.creditAmount}€ de crédits</div>
-          <div className="text-sm text-gray-600">{paymentData.userEmail}</div>
+          <div className="font-semibold text-gray-900">{(paymentData?.creditAmount ?? paymentData?.amount) ?? 0}€ de crédits</div>
+          <div className="text-sm text-gray-600">{paymentData?.userEmail ?? 'Utilisateur'}</div>
         </div>
 
         {qrCode && (
