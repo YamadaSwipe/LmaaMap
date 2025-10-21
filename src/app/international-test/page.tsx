@@ -10,6 +10,18 @@ interface FountainCounts {
   total: number
 }
 
+interface FountainItem {
+  id: string
+  name: string
+  address?: string
+  country?: string
+  latitude?: number
+  longitude?: number
+  source?: string
+  // allow other dynamic fields
+  [key: string]: any
+}
+
 interface ApiResponse {
   success: boolean
   message: string
@@ -19,7 +31,7 @@ interface ApiResponse {
     international: boolean
   }
   counts: FountainCounts
-  data: { id: string; name: string; value: number }[]
+  data: FountainItem[]
 }
 
 function InternationalTestContent() {
