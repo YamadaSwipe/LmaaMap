@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 interface Partner {
   id: string
   name: string
-  status: 'active' | 'pending' | 'suspended'
+  type?: string
   createdAt: string
 }
 
@@ -28,17 +28,15 @@ export async function GET(request: NextRequest) {
     }
 
     const partners = await prisma.partner.findMany()
-    const transformedPartners = partners.map((partner: Partner) => ({
+    const transformedPartners = partners.map((partner) => ({
       id: partner.id,
       name: partner.name,
-      status: partner.status,
+      type: partner.type,
       createdAt: partner.createdAt
     }))
 
     const partnerStats = {
-      active: transformedPartners.filter((p: Partner) => p.status === 'active').length,
-      pending: transformedPartners.filter((p: Partner) => p.status === 'pending').length,
-      suspended: transformedPartners.filter((p: Partner) => p.status === 'suspended').length
+      total: transformedPartners.length
     }
 
     return NextResponse.json({
