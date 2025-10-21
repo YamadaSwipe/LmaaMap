@@ -2,33 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import { ArrowLeft, MapPin, Navigation, Search, Filter, Plus, Menu } from 'lucide-react'
-import type { Map as LeafletMap, TileLayer as LeafletTileLayer, Marker as LeafletMarker, Popup as LeafletPopup } from 'leaflet';
-
-// Types pour éviter les erreurs d'import
-type MapContainerType = LeafletMap;
-type TileLayerType = LeafletTileLayer;
-type MarkerType = LeafletMarker;
-type PopupType = LeafletPopup;
-
-// Imports conditionnels pour éviter les erreurs SSR
-let MapContainer: MapContainerType, TileLayer: TileLayerType, Marker: MarkerType, Popup: PopupType, L: typeof import('leaflet');
-
-if (typeof window !== 'undefined') {
-  const leaflet = require('react-leaflet')
-  MapContainer = leaflet.MapContainer
-  TileLayer = leaflet.TileLayer
-  Marker = leaflet.Marker
-  Popup = leaflet.Popup
-  
-  // Import de Leaflet core
-  L = require('leaflet')
-  
-  // Import CSS seulement côté client
-  require('leaflet/dist/leaflet.css')
-  require('./map.css')
-}
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import './map.css';
 
 // Interface pour les points d'eau
 interface WaterPoint {

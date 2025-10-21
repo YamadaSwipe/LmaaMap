@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+export const revalidate = 60; // Revalidation toutes les 60 secondes
 
 interface AuditLog {
   id: string

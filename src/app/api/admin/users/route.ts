@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+export const revalidate = 60; // Revalidation toutes les 60 secondes
 
 // API pour récupérer les informations détaillées des utilisateurs
 export async function GET(request: NextRequest) {

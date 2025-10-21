@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import L from 'leaflet';
 import { 
   Search, 
   Filter, 
@@ -44,7 +45,7 @@ const MapComponentAdvanced = () => {
   const mapRef = useRef<HTMLDivElement>(null)
   const mapInstanceRef = useRef<L.Map | null>(null)
   const markersRef = useRef<L.Marker[]>([])
-  const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null)
+  const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null);
   const heatLayerRef = useRef<L.Layer | null>(null)
   
   const [loading, setLoading] = useState(true)

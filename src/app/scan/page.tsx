@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { 
   QrCode, 
@@ -43,10 +44,17 @@ interface ScanSession {
 }
 
 export default function ScanPage() {
+  return (
+    <Suspense fallback={<div>Chargement du scan...</div>}>
+      <ScanPageContent />
+    </Suspense>
+  )
+}
+
+function ScanPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const qrCodeParam = searchParams.get('qr')
-  
   const [showScanner, setShowScanner] = useState(!qrCodeParam)
   const [fountainData, setFountainData] = useState<FountainData | null>(null)
   const [scanSession, setScanSession] = useState<ScanSession | null>(null)

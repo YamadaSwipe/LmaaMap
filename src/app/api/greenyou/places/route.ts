@@ -1,3 +1,4 @@
+export const revalidate = 60; // Revalidation toutes les 60 secondes
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
