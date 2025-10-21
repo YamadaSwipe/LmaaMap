@@ -3,17 +3,6 @@ import { prisma } from '@/lib/prisma'
 import { Prisma } from '@prisma/client';
 
 // Types pour les entités
-interface User {
-  id: string
-  email: string
-  name: string
-  role: 'consumer' | 'partner' | 'admin'
-  status: 'active' | 'suspended' | 'pending'
-  createdAt: string
-  lastLogin?: string
-  totalScans?: number
-}
-
 interface Partner {
   id: string
   name: string
@@ -28,16 +17,14 @@ export async function GET(request: NextRequest) {
       id: user.id,
       email: user.email,
       name: user.name,
-      role: user.role, // Remplacement de `type` par `role`
+      role: user.role, // role selon schema Prisma (ex: "CONSUMER", "PARTNER", "ADMIN")
       createdAt: user.createdAt,
-      lastLogin: user.lastLogin,
-      totalScans: user.totalScans
     }))
 
     const userStats = {
-      active: transformedUsers.filter((u) => u.role === 'active').length, // Remplacement basé sur `role`
-      suspended: transformedUsers.filter((u) => u.role === 'suspended').length,
-      pending: transformedUsers.filter((u) => u.role === 'pending').length
+      consumers: transformedUsers.filter((u) => u.role === 'CONSUMER').length,
+      partners: transformedUsers.filter((u) => u.role === 'PARTNER').length,
+      admins: transformedUsers.filter((u) => u.role === 'ADMIN').length,
     }
 
     const partners = await prisma.partner.findMany()
