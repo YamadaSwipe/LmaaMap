@@ -117,6 +117,16 @@ export default function ParenteseYouHome() {
               GreenYou
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
+          {/* Bouton Carte mis en valeur */}
+          <Link
+            href="/map"
+            className="group flex items-center gap-3 bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-4 rounded-full text-lg font-bold shadow-xl transition-all transform hover:scale-105 mt-4 sm:mt-0"
+            style={{ minWidth: '220px' }}
+          >
+            <MapPin className="w-6 h-6" />
+            Carte
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
           </div>
 
           <div className="mt-16 animate-bounce">
