@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
       address?: string;
       city?: string;
       description?: string;
-      createdAt: string;
+      createdAt: Date;
     }) => ({
       id: fountain.id,
       name: fountain.name,
@@ -148,157 +148,157 @@ export async function GET(request: NextRequest) {
         address: 'Corniche Ain Diab, Casablanca',
         hours: '24h/24',
         status: 'active',
-        description: 'Fontaine moderne sur la célèbre corniche de Casablanca',
-        quality: 'excellente',
-        maintenance: 'Dernière maintenance: 16 Oct 2025'
-      },
+        description: 'import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma';
+import { getFountainsAroundPoint, getMoroccanFountains, getFrenchFountains, getInternationalFountains, MOROCCO_CITIES } from '@/lib/overpass'
+
+export async function GET(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url)
+    const includeOSM = searchParams.get('includeOSM') === 'true'
+    const includeFrance = searchParams.get('includeFrance') === 'true'
+    const international = searchParams.get('international') === 'true'
+    
+    // 1. Récupérer les fontaines de la base de données (créées via admin)
+    const databaseFountains = await prisma.fountain.findMany()
+
+    // Convertir les fontaines de la base de données au format de l'API
+    const dbFountainsFormatted = databaseFountains.map((fountain: {
+      id: string;
+      name: string;
+      latitude: number;
+      longitude: number;
+      address?: string;
+      city?: string;
+      description?: string;
+      createdAt: Date;
+    }) => ({
+      id: fountain.id,
+      name: fountain.name,
+      latitude: fountain.latitude,
+      longitude: fountain.longitude,
+      address: fountain.address || `${fountain.city || 'Ville non spécifiée'}`,
+      description: fountain.description || 'Fontaine créée via administration',
+      maintenance: `Créée le: ${new Date(fountain.createdAt).toLocaleDateString('fr-FR')}`
+    }))
+
+    // 2. Données des fontaines publiques statiques au Maroc
+    const staticFountains = [
       {
-        id: 'fountain-casa-mall',
-        name: 'Point d\'eau Morocco Mall',
-        type: 'public',
-        latitude: 33.5928,
-        longitude: -7.6761,
-        address: 'Morocco Mall, Casablanca',
-        hours: '10h-22h',
+        id: 'fountain-1',
+        name: 'Fontaine Jemaa el-Fna',
+        type: 'fountain',
+        latitude: 31.6295,
+        longitude: -7.9890,
+        address: 'Place Jemaa el-Fna, Marrakech',
+        hours: '24h/24',
         status: 'active',
-        description: 'Point d\'eau dans le plus grand centre commercial du Maroc',
+        description: 'Fontaine publique historique au cœur de la médina de Marrakech',
         quality: 'excellente',
         maintenance: 'Dernière maintenance: 15 Oct 2025'
       },
       {
-        id: 'fountain-casa-maarif',
-        name: 'Fontaine Quartier Maarif',
+        id: 'fountain-2', 
+        name: 'Fontaine Hassan II',
         type: 'fountain',
-        latitude: 33.5892,
-        longitude: -7.6114,
-        address: 'Boulevard Zerktouni, Maarif, Casablanca',
+        latitude: 33.5731,
+        longitude: -7.5898,
+        address: 'Boulevard Mohammed V, Casablanca',
         hours: '24h/24',
         status: 'active',
-        description: 'Fontaine publique au cœur du quartier Maarif',
+        description: 'Fontaine moderne près de la mosquée Hassan II',
         quality: 'bonne',
-        maintenance: 'Dernière maintenance: 14 Oct 2025'
+        maintenance: 'Dernière maintenance: 10 Oct 2025'
       },
-      // RABAT - Nouvelles fontaines
       {
-        id: 'fountain-rabat-agdal',
-        name: 'Fontaine Quartier Agdal',
+        id: 'fountain-3',
+        name: 'Fontaine Kasbah des Oudayas',
         type: 'fountain',
-        latitude: 33.9598,
-        longitude: -6.8498,
-        address: 'Avenue Mohamed VI, Agdal, Rabat',
-        hours: '24h/24',
+        latitude: 34.0263,
+        longitude: -6.8326,
+        address: 'Kasbah des Oudayas, Rabat',
+        hours: '6h-22h',
         status: 'active',
-        description: 'Fontaine moderne dans le quartier résidentiel Agdal',
-        quality: 'excellente',
-        maintenance: 'Dernière maintenance: 16 Oct 2025'
-      },
-      {
-        id: 'fountain-rabat-mega-mall',
-        name: 'Point d\'eau Mega Mall',
-        type: 'public',
-        latitude: 33.9716,
-        longitude: -6.8394,
-        address: 'Mega Mall, Rabat',
-        hours: '10h-22h',
-        status: 'active',
-        description: 'Point d\'eau dans le centre commercial Mega Mall',
-        quality: 'excellente',
-        maintenance: 'Dernière maintenance: 15 Oct 2025'
-      },
-      // MARRAKECH - Nouvelles fontaines
-      {
-        id: 'fountain-marrakech-gueliz',
-        name: 'Fontaine Gueliz',
-        type: 'fountain',
-        latitude: 31.6346,
-        longitude: -8.0152,
-        address: 'Avenue Mohammed V, Gueliz, Marrakech',
-        hours: '24h/24',
-        status: 'active',
-        description: 'Fontaine dans le quartier moderne de Gueliz',
+        description: 'Fontaine traditionnelle dans la kasbah historique',
         quality: 'bonne',
-        maintenance: 'Dernière maintenance: 16 Oct 2025'
+        maintenance: 'Dernière maintenance: 12 Oct 2025'
       },
       {
-        id: 'fountain-marrakech-menara-mall',
-        name: 'Point d\'eau Menara Mall',
+        id: 'public-1',
+        name: 'Point d\'eau Municipal Agdal',
         type: 'public',
-        latitude: 31.6069,
-        longitude: -8.0278,
-        address: 'Menara Mall, Marrakech',
-        hours: '10h-22h',
+        latitude: 31.6067,
+        longitude: -7.9900,
+        address: 'Quartier Agdal, Marrakech',
+        hours: '6h-23h',
         status: 'active',
-        description: 'Point d\'eau dans le centre commercial Menara Mall',
-        quality: 'excellente',
-        maintenance: 'Dernière maintenance: 15 Oct 2025'
-      },
-      {
-        id: 'fountain-marrakech-majorelle',
-        name: 'Point d\'eau Jardin Majorelle',
-        type: 'public',
-        latitude: 31.6408,
-        longitude: -8.0036,
-        address: 'Rue Yves Saint Laurent, Marrakech',
-        hours: '8h-17h',
-        status: 'active',
-        description: 'Point d\'eau près du célèbre Jardin Majorelle',
+        description: 'Point d\'eau municipal gratuit - Zone résidentielle',
         quality: 'excellente',
         maintenance: 'Dernière maintenance: 14 Oct 2025'
       },
-      // FES - Nouvelles fontaines
       {
-        id: 'fountain-fes-medina',
-        name: 'Fontaine Bab Boujloud',
+        id: 'fountain-laayoune-1',
+        name: 'Fontaine Place Al Massira',
         type: 'fountain',
-        latitude: 34.0648,
-        longitude: -4.9739,
-        address: 'Bab Boujloud, Fès',
+        latitude: 27.1561,
+        longitude: -13.2019,
+        address: 'Place Al Massira, Laayoune',
         hours: '24h/24',
         status: 'active',
-        description: 'Fontaine traditionnelle à l\'entrée de la médina de Fès',
+        description: 'Fontaine publique moderne au centre de Laayoune',
         quality: 'bonne',
         maintenance: 'Dernière maintenance: 16 Oct 2025'
       },
       {
-        id: 'fountain-fes-ville-nouvelle',
-        name: 'Fontaine Ville Nouvelle',
-        type: 'fountain',
-        latitude: 34.0372,
-        longitude: -5.0007,
-        address: 'Avenue Hassan II, Fès',
-        hours: '24h/24',
+        id: 'fountain-laayoune-2',
+        name: 'Point d\'eau Quartier Zakat',
+        type: 'public',
+        latitude: 27.1734,
+        longitude: -13.1887,
+        address: 'Quartier Zakat, Laayoune',
+        hours: '6h-22h',
         status: 'active',
-        description: 'Fontaine moderne dans la ville nouvelle de Fès',
+        description: 'Point d\'eau municipal dans le quartier résidentiel Zakat',
         quality: 'excellente',
         maintenance: 'Dernière maintenance: 15 Oct 2025'
       },
-      // TANGER - Nouvelles fontaines
       {
-        id: 'fountain-tanger-corniche',
-        name: 'Fontaine Corniche de Tanger',
+        id: 'fountain-dakhla-1',
+        name: 'Fontaine Port de Dakhla',
         type: 'fountain',
-        latitude: 35.7595,
-        longitude: -5.8340,
-        address: 'Boulevard Mohamed VI, Tanger',
+        latitude: 23.7181,
+        longitude: -15.9573,
+        address: 'Avenue du Port, Dakhla',
         hours: '24h/24',
         status: 'active',
-        description: 'Fontaine sur la corniche avec vue sur le détroit',
-        quality: 'excellente',
+        description: 'Fontaine près du port de pêche de Dakhla',
+        quality: 'bonne',
         maintenance: 'Dernière maintenance: 16 Oct 2025'
       },
       {
-        id: 'fountain-tanger-ibn-battouta',
-        name: 'Point d\'eau Ibn Battouta Mall',
+        id: 'fountain-dakhla-2',
+        name: 'Point d\'eau Lagune Blanche',
         type: 'public',
-        latitude: 35.7508,
-        longitude: -5.9367,
-        address: 'Ibn Battouta Mall, Tanger',
-        hours: '10h-22h',
+        latitude: 23.6850,
+        longitude: -15.9400,
+        address: 'Route de la Lagune, Dakhla',
+        hours: '6h-20h',
         status: 'active',
-        description: 'Point d\'eau dans le centre commercial Ibn Battouta',
+        description: 'Point d\'eau public près de la célèbre lagune blanche',
         quality: 'excellente',
-        maintenance: 'Dernière maintenance: 15 Oct 2025'
+        maintenance: 'Dernière maintenance: 14 Oct 2025'
       },
+      // CASABLANCA - Nouvelles fontaines
+      {
+        id: 'fountain-casa-corniche',
+        name: 'Fontaine Corniche Ain Diab',
+        type: 'fountain',
+        latitude: 33.5942,
+        longitude: -7.6669,
+        address: 'Corniche Ain Diab, Casablanca',
+        hours: '24h/24',
+        status: 'active',
+        description: '
       // AGADIR - Nouvelles fontaines
       {
         id: 'fountain-agadir-corniche',
