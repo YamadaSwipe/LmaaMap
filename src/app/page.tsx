@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { Droplet, Leaf, MapPin, Heart, Users, ArrowRight, CheckCircle, Sparkles } from 'lucide-react'
 
-export default function ParenteseYouHome() {
+export default function ParentheseYouHome() {
   const [stats, setStats] = useState({
     bouteilles: 0,
     etablissements: 0,
@@ -29,10 +29,10 @@ export default function ParenteseYouHome() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo ParenteseYou */}
+            {/* Logo ParentheseYou */}
             <Link href="/" className="flex items-center gap-2">
               <div className="text-2xl font-extrabold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                ParenteseYou
+                ParentheseYou
               </div>
             </Link>
 
@@ -88,7 +88,7 @@ export default function ParenteseYouHome() {
 
         <div className="relative max-w-6xl mx-auto text-center z-10">
             <h1 className="text-6xl md:text-8xl font-extrabold mb-8 bg-gradient-to-r from-blue-600 via-green-600 to-blue-600 bg-clip-text text-transparent">
-              ParenteseYou
+              ParentheseYou
             </h1>
 
           <p className="text-2xl md:text-4xl font-semibold text-gray-800 mb-6">
@@ -426,7 +426,7 @@ export default function ParenteseYouHome() {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">
-                ParenteseYou
+                ParentheseYou
               </h3>
               <p className="text-gray-400 leading-relaxed">
                 Faites une pause pour la planète. Voyagez responsable au Maroc avec LmaaMap et GreenYou.
@@ -481,7 +481,7 @@ export default function ParenteseYouHome() {
           </div>
 
           <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 ParenteseYou - LmaaMap & GreenYou Maroc. Tous droits réservés.</p>
+            <p>&copy; 2025 ParentheseYou - LmaaMap & GreenYou Maroc. Tous droits réservés.</p>
             <p className="mt-2 text-sm">🇲🇦 Fait avec ❤️ pour un Maroc plus durable</p>
           </div>
         </div>
